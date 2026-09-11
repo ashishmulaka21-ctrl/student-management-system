@@ -1,0 +1,206 @@
+{% extends 'students/base.html' %}
+
+{% block content %}
+
+<div class="topbar">
+    <div>
+        <p class="welcome-text">Welcome back 👋</p>
+        <h1>Dashboard</h1>
+    </div>
+
+    <div class="profile-box">
+        <div class="profile-avatar">A</div>
+        <div>
+            <strong>Administrator</strong>
+            <small>Student Management</small>
+        </div>
+    </div>
+</div>
+
+
+<!-- STATISTICS -->
+
+<div class="premium-cards">
+
+    <div class="premium-card students-card">
+        <div class="card-icon">👨‍🎓</div>
+        <div>
+            <span>Total Students</span>
+            <h2>{{ total_students }}</h2>
+            <small>Registered students</small>
+        </div>
+    </div>
+
+    <div class="premium-card courses-card">
+        <div class="card-icon">📚</div>
+        <div>
+            <span>Total Courses</span>
+            <h2>{{ total_courses }}</h2>
+            <small>Active courses</small>
+        </div>
+    </div>
+
+    <div class="premium-card attendance-card">
+        <div class="card-icon">✓</div>
+        <div>
+            <span>Attendance</span>
+            <h2>92%</h2>
+            <small>Overall attendance</small>
+        </div>
+    </div>
+
+    <div class="premium-card performance-card">
+        <div class="card-icon">↗</div>
+        <div>
+            <span>Performance</span>
+            <h2>87%</h2>
+            <small>Average performance</small>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- MAIN GRID -->
+
+<div class="dashboard-grid">
+
+    <!-- CHART -->
+
+    <div class="dashboard-panel chart-panel">
+
+        <div class="panel-header">
+            <div>
+                <h2>Student Overview</h2>
+                <p>Student statistics and performance</p>
+            </div>
+
+            <select>
+                <option>This Year</option>
+                <option>This Month</option>
+            </select>
+        </div>
+
+        <div class="fake-chart">
+
+            <div class="chart-line line-one"></div>
+            <div class="chart-line line-two"></div>
+            <div class="chart-line line-three"></div>
+            <div class="chart-line line-four"></div>
+
+            <div class="chart-bars">
+                <span style="height:45%"></span>
+                <span style="height:65%"></span>
+                <span style="height:52%"></span>
+                <span style="height:78%"></span>
+                <span style="height:60%"></span>
+                <span style="height:88%"></span>
+                <span style="height:72%"></span>
+                <span style="height:94%"></span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- QUICK ACTIONS -->
+
+    <div class="dashboard-panel">
+
+        <div class="panel-header">
+            <div>
+                <h2>Quick Actions</h2>
+                <p>Manage your students</p>
+            </div>
+        </div>
+
+        <div class="quick-actions">
+
+            <a href="{% url 'add_student' %}" class="action-box">
+                <div>➕</div>
+                <span>Add Student</span>
+            </a>
+
+            <a href="{% url 'student_list' %}" class="action-box">
+                <div>👨‍🎓</div>
+                <span>View Students</span>
+            </a>
+
+            <a href="/admin/" class="action-box">
+                <div>⚙️</div>
+                <span>Admin Panel</span>
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- RECENT STUDENTS -->
+
+<div class="dashboard-panel recent-panel">
+
+    <div class="panel-header">
+
+        <div>
+            <h2>Recent Students</h2>
+            <p>Recently registered students</p>
+        </div>
+
+        <a href="{% url 'student_list' %}" class="view-all">
+            View All →
+        </a>
+
+    </div>
+
+    <div class="student-table">
+
+        {% for student in students|slice:":5" %}
+
+        <div class="student-row">
+
+            <div class="student-info">
+
+                <div class="student-avatar">
+                    {{ student.name|first|upper }}
+                </div>
+
+                <div>
+                    <strong>{{ student.name }}</strong>
+                    <small>{{ student.student_id }}</small>
+                </div>
+
+            </div>
+
+            <div class="student-course">
+                {{ student.course }}
+            </div>
+
+            <div class="student-email">
+                {{ student.email }}
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="empty-students">
+            <div class="empty-icon">👨‍🎓</div>
+            <h3>No students yet</h3>
+            <p>Add your first student to see them here.</p>
+
+            <a href="{% url 'add_student' %}" class="premium-btn">
+                + Add Student
+            </a>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

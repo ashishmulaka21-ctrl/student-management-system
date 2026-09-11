@@ -1,0 +1,109 @@
+{% extends 'students/base.html' %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <h1>Students</h1>
+
+    <a href="{% url 'add_student' %}"
+       class="btn">
+
+        + Add Student
+
+    </a>
+
+</div>
+
+
+<form method="GET"
+      class="search-box">
+
+    <input
+        type="text"
+        name="search"
+        placeholder="Search by name, ID or course"
+        value="{{ search }}"
+    >
+
+    <button type="submit">
+        Search
+    </button>
+
+</form>
+
+
+<table>
+
+    <thead>
+
+        <tr>
+
+            <th>Student ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Course</th>
+            <th>Actions</th>
+
+        </tr>
+
+    </thead>
+
+
+    <tbody>
+
+        {% for student in students %}
+
+        <tr>
+
+            <td>{{ student.student_id }}</td>
+
+            <td>{{ student.name }}</td>
+
+            <td>{{ student.email }}</td>
+
+            <td>{{ student.phone }}</td>
+
+            <td>{{ student.course }}</td>
+
+            <td>
+
+                <a
+                    href="{% url 'edit_student' student.id %}"
+                    class="edit-btn">
+
+                    Edit
+
+                </a>
+
+
+                <a
+                    href="{% url 'delete_student' student.id %}"
+                    class="delete-btn">
+
+                    Delete
+
+                </a>
+
+            </td>
+
+        </tr>
+
+        {% empty %}
+
+        <tr>
+
+            <td colspan="6">
+                No students found.
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}
