@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -78,12 +79,11 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'student_management',
         'USER': 'root',
-        'PASSWORD': '7815826892@AR',
+        'PASSWORD': os.environ.get('7815826892@AR'),
         'HOST': 'localhost',
         'PORT': '3306',
     }
 }
-
 
 
 # Password validation
