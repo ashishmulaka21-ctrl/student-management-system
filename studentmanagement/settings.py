@@ -133,3 +133,7 @@ MAILERS = {
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://student-management-system-production-9b3d.up.railway.app",
+]
